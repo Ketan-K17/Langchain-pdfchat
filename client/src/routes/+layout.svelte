@@ -22,3 +22,14 @@
 	<Navbar />
 	<slot />
 </div>
+
+<script context="module" lang="ts">
+	import { auth } from '$s/auth';
+	import { redirect } from '@sveltejs/kit';
+
+	export const load = async ({ session }) => {
+		if (!session.user) {
+			throw redirect(302, '/documents');
+		}
+	};
+</script>
